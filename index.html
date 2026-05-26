@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="format-detection" content="address=no">
+  <meta name="format-detection" content="email=no">
+  <meta name="theme-color" content="#060606">
   <title>Ikka Motors — Buy · Sell · Exchange | Kolkata's Premier Auto Exchange</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -483,27 +487,39 @@
       transition: opacity 0.4s var(--ease);
     }
     .mobile-menu.open { opacity: 1; pointer-events: all; }
-    .mobile-menu a {
+    .mobile-menu > a {
       font-family: var(--serif);
-      font-size: clamp(36px, 9vw, 60px);
-      font-weight: 300;
-      color: rgba(255,255,255,0.45);
+      font-size: clamp(34px, 8.5vw, 56px);
+      font-weight: 400;
+      color: rgba(255,255,255,0.88);
       text-decoration: none;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.015em;
+      line-height: 1;
       opacity: 0; transform: translateY(18px);
       transition: color 0.3s, transform 0.3s, opacity 0.45s var(--ease-out);
     }
-    .mobile-menu.open a { opacity: 1; transform: translateY(0); }
-    .mobile-menu.open a:nth-child(1) { transition-delay: 0.06s; }
-    .mobile-menu.open a:nth-child(2) { transition-delay: 0.12s; }
-    .mobile-menu.open a:nth-child(3) { transition-delay: 0.18s; }
-    .mobile-menu.open a:nth-child(4) { transition-delay: 0.24s; }
-    .mobile-menu a:hover { color: var(--gold); transform: translateX(10px); }
+    .mobile-menu.open > a { opacity: 1; transform: translateY(0); }
+    .mobile-menu.open > a:nth-child(1) { transition-delay: 0.06s; }
+    .mobile-menu.open > a:nth-child(2) { transition-delay: 0.12s; }
+    .mobile-menu.open > a:nth-child(3) { transition-delay: 0.18s; }
+    .mobile-menu.open > a:nth-child(4) { transition-delay: 0.24s; }
+    .mobile-menu > a:active { color: var(--gold); }
     .mobile-cta-wrap {
       opacity: 0; transform: translateY(18px);
-      transition: all 0.45s 0.3s var(--ease-out);
+      transition: opacity 0.45s 0.3s var(--ease-out), transform 0.45s 0.3s var(--ease-out);
+      margin-top: 1.25rem;
     }
     .mobile-menu.open .mobile-cta-wrap { opacity: 1; transform: translateY(0); }
+    .mobile-menu .btn-gold {
+      font-family: var(--sans) !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      color: var(--black) !important;
+      letter-spacing: 0.12em !important;
+      padding: 1rem 2rem !important;
+      text-transform: uppercase !important;
+      line-height: 1 !important;
+    }
     .mobile-divider {
       width: 1px; height: 40px;
       background: rgba(245,196,0,0.2);
@@ -520,14 +536,19 @@
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       object-fit: cover;
+      object-position: center center;
       opacity: 1;
       will-change: transform;
-      transform: translate3d(0,0,0) scale(1.04);
-      animation: kenBurns 22s ease-in-out infinite alternate;
+      transform: translate3d(0,0,0) scale(1);
+      animation: kenBurns 28s ease-in-out infinite alternate;
     }
     @keyframes kenBurns {
-      0% { transform: translate3d(0,0,0) scale(1.04); }
-      100% { transform: translate3d(-1.5%, -1.2%, 0) scale(1.14); }
+      0% { transform: translate3d(0,0,0) scale(1); }
+      100% { transform: translate3d(-0.6%, -0.6%, 0) scale(1.05); }
+    }
+    @keyframes kenBurnsMobile {
+      0% { transform: translate3d(0,0,0) scale(1); }
+      100% { transform: translate3d(-0.4%, -0.4%, 0) scale(1.035); }
     }
     .hero-overlay {
       position: absolute; inset: 0;
@@ -1108,8 +1129,19 @@
       color: var(--gold); margin-bottom: 4px;
     }
     .contact-val {
-      font-size: 14.5px; color: rgba(255,255,255,0.72);
-      font-weight: 300; line-height: 1.6;
+      font-size: 14.5px; color: rgba(255,255,255,0.82);
+      font-weight: 300; line-height: 1.65;
+      letter-spacing: 0.005em;
+    }
+    .contact-val a {
+      color: inherit; text-decoration: none;
+      transition: color 0.3s var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    .contact-val a:hover { color: var(--gold); border-bottom-color: rgba(245,196,0,0.4); }
+    a[href^="tel:"], a[href^="mailto:"] {
+      color: inherit; text-decoration: none;
+      -webkit-text-decoration: none;
     }
     .map-box {
       margin-top: 2rem; width: 100%; height: 220px;
@@ -1241,30 +1273,104 @@
       .nav-wrap { padding: 1rem; }
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
+      .hero { height: 100svh; }
+      .hero-video { animation-name: kenBurnsMobile; }
       .hero-content { padding: 0 1.5rem; }
-      .hero-title { font-size: clamp(44px, 11vw, 72px); margin-bottom: 1.25rem; }
-      .section { padding: 5rem 1.5rem; }
-      .services-grid { grid-template-columns: 1fr; }
-      .service-card { padding: 2.5rem 2rem; }
-      .stats-inner { grid-template-columns: 1fr 1fr; padding: 3rem 1.5rem; }
-      .stat-item { border-right: none; }
+      .hero-title {
+        font-size: clamp(46px, 11.5vw, 76px);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        margin-bottom: 1.4rem;
+      }
+      .hero-sub {
+        font-size: 14.5px;
+        color: rgba(255,255,255,0.62) !important;
+        line-height: 1.7;
+        max-width: 92%;
+      }
+      .hero-eyebrow { margin-bottom: 2rem; padding: 4px 12px; }
+      .hero-eyebrow span { font-size: 9px; }
+      .section { padding: 5.5rem 1.5rem; }
+      .section-title {
+        font-size: clamp(34px, 8.5vw, 52px);
+        line-height: 1.04;
+        letter-spacing: -0.025em;
+      }
+      .section-label span { font-size: 8.5px; }
+      .services-header { margin-bottom: 3rem; }
+      .services-desc {
+        font-size: 14px;
+        color: rgba(255,255,255,0.58);
+        line-height: 1.8;
+      }
+      .services-grid { grid-template-columns: 1fr; gap: 1px; }
+      .service-card { padding: 2.5rem 1.75rem; }
+      .svc-title { font-size: 26px; }
+      .svc-body {
+        font-size: 13.5px;
+        color: rgba(255,255,255,0.56);
+        line-height: 1.78;
+        margin-bottom: 1.75rem;
+      }
+      .svc-num { font-size: 80px; top: 0.5rem; right: 1.2rem; }
+      .stats-inner { grid-template-columns: 1fr 1fr; padding: 3rem 1.5rem; gap: 0.5rem; }
+      .stat-item { border-right: none; padding: 1.25rem 0.5rem; }
+      .stat-num { font-size: clamp(42px, 11vw, 58px); }
+      .stat-lbl { font-size: 8.5px; letter-spacing: 0.18em; }
       .cars-grid { grid-template-columns: 1fr; }
+      .cars-header { margin-bottom: 2.5rem; }
       .car-enquire { opacity: 1; transform: translateY(0); }
-      .process-grid { grid-template-columns: 1fr 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
+      .car-info { padding: 1.4rem; }
+      .car-name { font-size: 22px; }
+      .car-spec { font-size: 11.5px; color: rgba(255,255,255,0.5); }
+      .process-grid { grid-template-columns: 1fr 1fr; margin-top: 3rem; }
+      .process-step { padding: 2rem 1.5rem; }
+      .step-num { font-size: 54px; margin-bottom: 1rem; color: rgba(245,196,0,0.18); }
+      .step-title { font-size: 19px; }
+      .step-body {
+        font-size: 12.5px;
+        color: rgba(255,255,255,0.56);
+        line-height: 1.75;
+      }
+      .testimonials-grid { grid-template-columns: 1fr; margin-top: 3rem; }
+      .testi-card { padding: 2.25rem 1.75rem; }
+      .testi-text {
+        font-size: 15.5px;
+        color: rgba(255,255,255,0.82);
+        line-height: 1.7;
+      }
       .cta-inner { padding: 4.5rem 1.5rem; gap: 2.5rem; }
-      .cta-actions { flex-direction: row; flex-wrap: wrap; }
+      .cta-title { line-height: 1.02; }
+      .cta-sub { font-size: 13.5px; color: rgba(8,8,8,0.7); line-height: 1.75; }
+      .cta-actions { flex-direction: column; gap: 0.7rem; width: 100%; }
+      .btn-dark, .btn-outline-dark { width: 100%; justify-content: center; font-size: 11px; }
+      .contact-grid { margin-top: 3rem; gap: 2.5rem; }
+      .contact-detail { gap: 1rem; margin-bottom: 1.5rem; }
+      .contact-icon { width: 36px; height: 36px; }
+      .contact-icon svg { width: 14px; height: 14px; }
+      .contact-lbl { font-size: 7.5px; }
+      .contact-val { font-size: 14px; color: rgba(255,255,255,0.85); }
+      .map-box { height: 200px; margin-top: 1.5rem; }
       .form-row { grid-template-columns: 1fr; }
       footer { padding: 4rem 1.5rem 2.5rem; }
-      .footer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+      .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.42); max-width: 100%; }
+      .footer-col h4 { margin-bottom: 1.1rem; }
+      .footer-col ul a { font-size: 13px; color: rgba(255,255,255,0.5); }
       .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
-      .float-badge { bottom: 1.25rem; right: 1.25rem; }
+      .footer-copy { font-size: 10.5px; color: rgba(255,255,255,0.32); }
+      .float-badge { bottom: 1rem; right: 1rem; gap: 8px; }
+      .float-btn { width: 44px; height: 44px; }
+      .float-btn svg { width: 17px; height: 17px; }
+      .section-pill { display: none; }
     }
     @media (max-width: 480px) {
-      .hero-title { font-size: 46px; }
+      .hero-title { font-size: 48px; }
       .process-grid { grid-template-columns: 1fr; }
       .stats-inner { grid-template-columns: 1fr 1fr; }
-      .cta-title { font-size: 36px; }
+      .cta-title { font-size: clamp(36px, 9vw, 44px); }
+      .section { padding: 4.5rem 1.25rem; }
+      .footer-inner { padding: 0; }
     }
 
     /* ─── MOBILE / TOUCH ENHANCEMENTS ─── */
@@ -1801,7 +1907,7 @@
           </div>
           <div>
             <div class="contact-lbl">Phone</div>
-            <div class="contact-val">+91 89883 88688</div>
+            <div class="contact-val"><a href="tel:+918988388688">+91 89883 88688</a></div>
           </div>
         </div>
         <div class="contact-detail">
@@ -1810,7 +1916,7 @@
           </div>
           <div>
             <div class="contact-lbl">Email</div>
-            <div class="contact-val">Ikkamotors1@gmail.com</div>
+            <div class="contact-val"><a href="mailto:Ikkamotors1@gmail.com">Ikkamotors1@gmail.com</a></div>
           </div>
         </div>
         <div class="contact-detail">
