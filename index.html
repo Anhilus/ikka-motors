@@ -971,6 +971,49 @@
     }
     .car-enquire:hover { background: var(--gold-deep); }
 
+    /* ─── REAL CAR PHOTO ─── */
+    .car-photo {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 30%;
+      display: block;
+      transition: transform 0.55s var(--ease);
+    }
+    .car-card:hover .car-photo { transform: scale(1.06); }
+    .car-img-wrap { height: 220px; }
+
+    /* ─── INVENTORY FILTERS ─── */
+    .inv-filters {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .inv-filter {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 8px 20px; border-radius: 100px;
+      border: 1px solid rgba(245,196,0,0.18);
+      color: rgba(255,255,255,0.36);
+      background: transparent; cursor: pointer;
+      transition: all 0.3s var(--ease);
+    }
+    .inv-filter:hover {
+      border-color: rgba(245,196,0,0.5);
+      color: rgba(255,255,255,0.72);
+    }
+    .inv-filter.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+    .inv-count {
+      font-size: 9px; font-weight: 400;
+      letter-spacing: 0.12em; color: rgba(255,255,255,0.22);
+      margin-top: -1.5rem; margin-bottom: 2rem;
+    }
+    .inv-count span { color: var(--gold); font-weight: 600; }
+
+    /* car-card hidden by filter */
+    .car-card.hidden { display: none; }
+
     /* ─── PROCESS ─── */
     .process-bg {
       background: var(--surface);
@@ -1268,6 +1311,7 @@
       .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
       .footer-inner { grid-template-columns: 1fr 1fr; gap: 3rem; }
       .cta-inner { grid-template-columns: 1fr; }
+      .cars-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .nav-wrap { padding: 1rem; }
@@ -1372,6 +1416,9 @@
       .cars-grid { grid-template-columns: 1fr; }
       .cars-header { margin-bottom: 2.5rem; }
       .car-enquire { opacity: 1; transform: translateY(0); }
+      .inv-filters { gap: 6px; margin-bottom: 2rem; }
+      .inv-filter { padding: 7px 14px; font-size: 8.5px; letter-spacing: 0.18em; }
+      .inv-count { font-size: 8.5px; margin-top: -1rem; margin-bottom: 1.5rem; }
       .car-info { padding: 1.4rem; }
       .car-name { font-size: 22px; }
       .car-spec { font-size: 11.5px; color: rgba(255,255,255,0.5); }
@@ -1682,134 +1729,315 @@
       </a>
     </div>
 
-    <div class="cars-grid">
-      <!-- Card 1 -->
-      <div class="car-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="0">
-        <div class="car-tag">For Sale</div>
+    <div class="inv-filters" id="invFilters" role="group" aria-label="Filter by body type">
+      <button class="inv-filter active" data-filter="all">All Vehicles</button>
+      <button class="inv-filter" data-filter="hatchback">Hatchback</button>
+      <button class="inv-filter" data-filter="sedan">Sedan</button>
+      <button class="inv-filter" data-filter="suv">SUV</button>
+    </div>
+    <p class="inv-count" id="invCount"><span id="invNum">13</span> vehicles available</p>
+
+    <div class="cars-grid" id="carsGrid">
+
+      <!-- Kia Seltos HTX IMT Plus -->
+      <div class="car-card" data-category="suv" data-aos="fade-up" data-aos-duration="700" data-aos-delay="0">
+        <div class="car-tag" style="background:transparent;color:var(--gold);border:1px solid rgba(245,196,0,0.45);">Featured</div>
         <div class="car-img-wrap">
-          <svg class="car-img-svg" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="c1g" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style="stop-color:#e0e0e0;stop-opacity:1"/>
-                <stop offset="100%" style="stop-color:#b0b0b0;stop-opacity:1"/>
-              </linearGradient>
-            </defs>
-            <ellipse cx="200" cy="145" rx="170" ry="9" fill="rgba(0,0,0,0.45)"/>
-            <path d="M50 110 L50 130 L350 130 L350 110 L325 110 L305 78 L230 55 L160 55 L120 78 L80 110 Z" fill="url(#c1g)"/>
-            <path d="M155 78 L170 58 L240 58 L265 78 Z" fill="rgba(20,20,40,0.88)"/>
-            <line x1="205" y1="58" x2="208" y2="78" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
-            <circle cx="120" cy="130" r="24" fill="#090909" stroke="rgba(245,196,0,0.5)" stroke-width="1.5"/>
-            <circle cx="120" cy="130" r="14" fill="#161616" stroke="rgba(245,196,0,0.7)" stroke-width="1"/>
-            <circle cx="120" cy="130" r="5" fill="#F5C400"/>
-            <line x1="120" y1="116" x2="120" y2="144" stroke="rgba(245,196,0,0.4)" stroke-width="1.2"/>
-            <line x1="106" y1="130" x2="134" y2="130" stroke="rgba(245,196,0,0.4)" stroke-width="1.2"/>
-            <circle cx="290" cy="130" r="24" fill="#090909" stroke="rgba(245,196,0,0.5)" stroke-width="1.5"/>
-            <circle cx="290" cy="130" r="14" fill="#161616" stroke="rgba(245,196,0,0.7)" stroke-width="1"/>
-            <circle cx="290" cy="130" r="5" fill="#F5C400"/>
-            <line x1="290" y1="116" x2="290" y2="144" stroke="rgba(245,196,0,0.4)" stroke-width="1.2"/>
-            <line x1="276" y1="130" x2="304" y2="130" stroke="rgba(245,196,0,0.4)" stroke-width="1.2"/>
-          </svg>
+          <img class="car-photo" src="images/kia-seltos.jpg" alt="Kia Seltos HTX IMT Plus 2021" loading="lazy">
+          <div class="car-img-overlay"></div>
+          <div class="car-reflect"></div>
+        </div>
+        <div class="car-info">
+          <div class="car-brand">Kia</div>
+          <div class="car-name">Seltos HTX IMT+</div>
+          <div class="car-specs">
+            <div class="car-spec">2021</div>
+            <div class="car-spec">Petrol</div>
+            <div class="car-spec">22,000 km</div>
+          </div>
+          <div class="car-footer">
+            <div class="car-price">₹8.70L</div>
+            <button class="car-enquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mahindra Scorpio S3 -->
+      <div class="car-card" data-category="suv" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100">
+        <div class="car-tag" style="background:transparent;color:var(--gold);border:1px solid rgba(245,196,0,0.45);">Featured</div>
+        <div class="car-img-wrap">
+          <img class="car-photo" src="images/scorpio.jpg" alt="Mahindra Scorpio S3 2018" loading="lazy">
+          <div class="car-img-overlay"></div>
+          <div class="car-reflect"></div>
+        </div>
+        <div class="car-info">
+          <div class="car-brand">Mahindra</div>
+          <div class="car-name">Scorpio S3</div>
+          <div class="car-specs">
+            <div class="car-spec">2018</div>
+            <div class="car-spec">Diesel</div>
+            <div class="car-spec">80,500 km</div>
+          </div>
+          <div class="car-footer">
+            <div class="car-price">₹8.50L</div>
+            <button class="car-enquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Maruti S-Cross Zeta Smart Hybrid -->
+      <div class="car-card" data-category="suv" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+        <div class="car-tag" style="background:transparent;color:var(--gold);border:1px solid rgba(245,196,0,0.45);">Hybrid</div>
+        <div class="car-img-wrap">
+          <img class="car-photo" src="images/scross.jpg" alt="Maruti S-Cross Zeta Smart Hybrid 2019" loading="lazy">
           <div class="car-img-overlay"></div>
           <div class="car-reflect"></div>
         </div>
         <div class="car-info">
           <div class="car-brand">Maruti Suzuki</div>
-          <div class="car-name">Swift ZXi+</div>
+          <div class="car-name">S-Cross Zeta Hybrid</div>
           <div class="car-specs">
-            <div class="car-spec">2022</div>
-            <div class="car-spec">Petrol</div>
-            <div class="car-spec">28,000 km</div>
+            <div class="car-spec">2019</div>
+            <div class="car-spec">Diesel Hybrid</div>
+            <div class="car-spec">46,000 km</div>
           </div>
           <div class="car-footer">
-            <div class="car-price">₹7.2L <small>onward</small></div>
+            <div class="car-price">₹5.80L</div>
             <button class="car-enquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire</button>
           </div>
         </div>
       </div>
 
-      <!-- Card 2 -->
-      <div class="car-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="140">
-        <div class="car-tag" style="background:transparent;color:var(--gold);border:1px solid rgba(245,196,0,0.45);">Featured</div>
+      <!-- Ford EcoSport 1.5D Titanium -->
+      <div class="car-card" data-category="suv" data-aos="fade-up" data-aos-duration="700" data-aos-delay="0">
+        <div class="car-tag">For Sale</div>
         <div class="car-img-wrap">
-          <svg class="car-img-svg" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="c2g" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style="stop-color:#F5C400;stop-opacity:1"/>
-                <stop offset="100%" style="stop-color:#C9A800;stop-opacity:1"/>
-              </linearGradient>
-            </defs>
-            <ellipse cx="200" cy="145" rx="170" ry="9" fill="rgba(0,0,0,0.45)"/>
-            <path d="M40 115 L40 132 L360 132 L360 115 L330 115 L310 82 L235 56 L165 56 L130 82 L70 115 Z" fill="url(#c2g)"/>
-            <path d="M158 82 L175 60 L245 60 L270 82 Z" fill="rgba(0,0,0,0.78)"/>
-            <line x1="210" y1="60" x2="214" y2="82" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
-            <circle cx="115" cy="132" r="26" fill="#090909" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
-            <circle cx="115" cy="132" r="16" fill="#161616" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
-            <circle cx="115" cy="132" r="6" fill="#fff"/>
-            <circle cx="300" cy="132" r="26" fill="#090909" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
-            <circle cx="300" cy="132" r="16" fill="#161616" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
-            <circle cx="300" cy="132" r="6" fill="#fff"/>
-          </svg>
+          <img class="car-photo" src="images/ecosport.jpg" alt="Ford EcoSport 1.5D Titanium 2020" loading="lazy">
           <div class="car-img-overlay"></div>
           <div class="car-reflect"></div>
         </div>
         <div class="car-info">
-          <div class="car-brand">Hyundai</div>
-          <div class="car-name">Creta SX (O)</div>
+          <div class="car-brand">Ford</div>
+          <div class="car-name">EcoSport Titanium 1.5D</div>
           <div class="car-specs">
-            <div class="car-spec">2021</div>
+            <div class="car-spec">2020</div>
             <div class="car-spec">Diesel</div>
-            <div class="car-spec">42,000 km</div>
+            <div class="car-spec">1st Owner</div>
           </div>
           <div class="car-footer">
-            <div class="car-price">₹14.5L <small>onward</small></div>
+            <div class="car-price">₹5.50L</div>
             <button class="car-enquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire</button>
           </div>
         </div>
       </div>
 
-      <!-- Card 3 -->
-      <div class="car-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="280">
-        <div class="car-tag exchange">Exchange</div>
+      <!-- Tata Punch ADV 1.2 BS6 -->
+      <div class="car-card" data-category="suv" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100">
+        <div class="car-tag">For Sale</div>
         <div class="car-img-wrap">
-          <svg class="car-img-svg" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="c3g" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style="stop-color:#282828;stop-opacity:1"/>
-                <stop offset="100%" style="stop-color:#101010;stop-opacity:1"/>
-              </linearGradient>
-            </defs>
-            <ellipse cx="200" cy="145" rx="170" ry="9" fill="rgba(0,0,0,0.45)"/>
-            <path d="M45 112 L45 132 L355 132 L355 112 L328 112 L308 76 L232 54 L168 54 L130 76 L75 112 Z" fill="url(#c3g)" stroke="rgba(245,196,0,0.18)" stroke-width="1"/>
-            <path d="M160 76 L178 57 L242 57 L268 76 Z" fill="rgba(10,10,25,0.92)"/>
-            <line x1="208" y1="57" x2="212" y2="76" stroke="rgba(245,196,0,0.22)" stroke-width="1.5"/>
-            <circle cx="117" cy="132" r="25" fill="#060606" stroke="rgba(245,196,0,0.6)" stroke-width="2"/>
-            <circle cx="117" cy="132" r="15" fill="#0f0f0f" stroke="rgba(245,196,0,0.8)" stroke-width="1"/>
-            <circle cx="117" cy="132" r="6" fill="#F5C400"/>
-            <line x1="117" y1="117" x2="117" y2="147" stroke="rgba(245,196,0,0.42)" stroke-width="1.2"/>
-            <line x1="102" y1="132" x2="132" y2="132" stroke="rgba(245,196,0,0.42)" stroke-width="1.2"/>
-            <circle cx="295" cy="132" r="25" fill="#060606" stroke="rgba(245,196,0,0.6)" stroke-width="2"/>
-            <circle cx="295" cy="132" r="15" fill="#0f0f0f" stroke="rgba(245,196,0,0.8)" stroke-width="1"/>
-            <circle cx="295" cy="132" r="6" fill="#F5C400"/>
-            <line x1="295" y1="117" x2="295" y2="147" stroke="rgba(245,196,0,0.42)" stroke-width="1.2"/>
-            <line x1="280" y1="132" x2="310" y2="132" stroke="rgba(245,196,0,0.42)" stroke-width="1.2"/>
-          </svg>
+          <img class="car-photo" src="images/tata-punch.jpg" alt="Tata Punch ADV 1.2 BS6 2022" loading="lazy">
           <div class="car-img-overlay"></div>
           <div class="car-reflect"></div>
         </div>
         <div class="car-info">
           <div class="car-brand">Tata Motors</div>
-          <div class="car-name">Nexon EV Max</div>
+          <div class="car-name">Punch ADV 1.2 BS6</div>
           <div class="car-specs">
-            <div class="car-spec">2023</div>
-            <div class="car-spec">Electric</div>
-            <div class="car-spec">18,000 km</div>
+            <div class="car-spec">2022</div>
+            <div class="car-spec">Petrol</div>
+            <div class="car-spec">27,000 km</div>
           </div>
           <div class="car-footer">
-            <div class="car-price">₹16.8L <small>onward</small></div>
+            <div class="car-price">₹5.40L</div>
             <button class="car-enquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire</button>
           </div>
         </div>
       </div>
+
+      <!-- Maruti Brezza VDI -->
+      <div class="car-card" data-category="suv" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+        <div class="car-tag" style="background:rgba(6,6,6,0.82);color:var(--gold);border:1px solid rgba(245,196,0,0.38);backdrop-filter:blur(10px);">Offer</div>
+        <div class="car-img-wrap">
+          <img class="car-photo" src="images/brezza.jpg" alt="Maruti Suzuki Brezza VDI 2018" loading="lazy">
+          <div class="car-img-overlay"></div>
+          <div class="car-reflect"></div>
+        </div>
+        <div class="car-info">
+          <div class="car-brand">Maruti Suzuki</div>
+          <div class="car-name">Vitara Brezza VDI</div>
+          <div class="car-specs">
+            <div class="car-spec">2018</div>
+            <div class="car-spec">Diesel</div>
+            <div class="car-spec">70,000 km</div>
+          </div>
+          <div class="car-footer">
+            <div class="car-price">₹5.30L <small style="text-decoration:line-through;opacity:0.45;">5.40</small></div>
+            <button class="car-enquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Maruti Swift Dzire VXI -->
+      <div class="car-card" data-category="sedan" data-aos="fade-up" data-aos-duration="700" data-aos-delay="0">
+        <div class="car-tag">For Sale</div>
+        <div class="car-img-wrap">
+          <img class="car-photo" src="images/dzire.jpg" alt="Maruti Swift Dzire VXI 2018" loading="lazy">
+          <div class="car-img-overlay"></div>
+          <div class="car-reflect"></div>
+        </div>
+        <div class="car-info">
+          <div class="car-brand">Maruti Suzuki</div>
+          <div class="car-name">Swift Dzire VXI</div>
+          <div class="car-specs">
+            <div class="car-spec">2018</div>
+            <div class="car-spec">Petrol</div>
+            <div class="car-spec">43,000 km</div>
+          </div>
+          <div class="car-footer">
+            <div class="car-price">₹4.50L</div>
+            <button class="car-enquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hyundai Santro Sportz -->
+      <div class="car-card" data-category="hatchback" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100">
+        <div class="car-tag">For Sale</div>
+        <div class="car-img-wrap">
+          <img class="car-photo" src="images/santro.jpg" alt="Hyundai Santro Sportz 2019" loading="lazy">
+          <div class="car-img-overlay"></div>
+          <div class="car-reflect"></div>
+        </div>
+        <div class="car-info">
+          <div class="car-brand">Hyundai</div>
+          <div class="car-name">Santro Sportz</div>
+          <div class="car-specs">
+            <div class="car-spec">2019</div>
+            <div class="car-spec">Petrol</div>
+            <div class="car-spec">37,000 km</div>
+          </div>
+          <div class="car-footer">
+            <div class="car-price">₹3.50L</div>
+            <button class="car-enquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hyundai Verna VTVT 1.4 -->
+      <div class="car-card" data-category="sedan" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+        <div class="car-tag">For Sale</div>
+        <div class="car-img-wrap">
+          <img class="car-photo" src="images/verna.jpg" alt="Hyundai Verna VTVT 1.4 2014" loading="lazy">
+          <div class="car-img-overlay"></div>
+          <div class="car-reflect"></div>
+        </div>
+        <div class="car-info">
+          <div class="car-brand">Hyundai</div>
+          <div class="car-name">Verna VTVT 1.4</div>
+          <div class="car-specs">
+            <div class="car-spec">2014</div>
+            <div class="car-spec">Petrol</div>
+            <div class="car-spec">70,000 km</div>
+          </div>
+          <div class="car-footer">
+            <div class="car-price">₹3.40L</div>
+            <button class="car-enquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hyundai Grand i10 Sports (O) 1.2 -->
+      <div class="car-card" data-category="hatchback" data-aos="fade-up" data-aos-duration="700" data-aos-delay="0">
+        <div class="car-tag">For Sale</div>
+        <div class="car-img-wrap">
+          <img class="car-photo" src="images/grand-i10.jpg" alt="Hyundai Grand i10 Sports 1.2 2017" loading="lazy">
+          <div class="car-img-overlay"></div>
+          <div class="car-reflect"></div>
+        </div>
+        <div class="car-info">
+          <div class="car-brand">Hyundai</div>
+          <div class="car-name">Grand i10 Sports 1.2</div>
+          <div class="car-specs">
+            <div class="car-spec">2017</div>
+            <div class="car-spec">Petrol</div>
+            <div class="car-spec">2nd Owner</div>
+          </div>
+          <div class="car-footer">
+            <div class="car-price">₹3.20L</div>
+            <button class="car-enquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Honda Amaze -->
+      <div class="car-card" data-category="sedan" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100">
+        <div class="car-tag">For Sale</div>
+        <div class="car-img-wrap">
+          <img class="car-photo" src="images/amaze.jpg" alt="Honda Amaze 2014" loading="lazy">
+          <div class="car-img-overlay"></div>
+          <div class="car-reflect"></div>
+        </div>
+        <div class="car-info">
+          <div class="car-brand">Honda</div>
+          <div class="car-name">Amaze</div>
+          <div class="car-specs">
+            <div class="car-spec">2014</div>
+            <div class="car-spec">Diesel</div>
+            <div class="car-spec">2nd Owner</div>
+          </div>
+          <div class="car-footer">
+            <div class="car-price">₹2.90L</div>
+            <button class="car-enquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Maruti Swift VDI (1st Owner) -->
+      <div class="car-card" data-category="hatchback" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+        <div class="car-tag">For Sale</div>
+        <div class="car-img-wrap">
+          <img class="car-photo" src="images/swift-vdi-1.jpg" alt="Maruti Swift VDI 2012 1st Owner" loading="lazy">
+          <div class="car-img-overlay"></div>
+          <div class="car-reflect"></div>
+        </div>
+        <div class="car-info">
+          <div class="car-brand">Maruti Suzuki</div>
+          <div class="car-name">Swift VDI</div>
+          <div class="car-specs">
+            <div class="car-spec">2012</div>
+            <div class="car-spec">Diesel</div>
+            <div class="car-spec">1st Owner</div>
+          </div>
+          <div class="car-footer">
+            <div class="car-price">₹2.30L</div>
+            <button class="car-enquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Maruti Swift VDI (2nd Owner) -->
+      <div class="car-card" data-category="hatchback" data-aos="fade-up" data-aos-duration="700" data-aos-delay="0">
+        <div class="car-tag">For Sale</div>
+        <div class="car-img-wrap">
+          <img class="car-photo" src="images/swift-vdi-2.jpg" alt="Maruti Swift VDI 2012 2nd Owner" loading="lazy">
+          <div class="car-img-overlay"></div>
+          <div class="car-reflect"></div>
+        </div>
+        <div class="car-info">
+          <div class="car-brand">Maruti Suzuki</div>
+          <div class="car-name">Swift VDI</div>
+          <div class="car-specs">
+            <div class="car-spec">2012</div>
+            <div class="car-spec">Diesel</div>
+            <div class="car-spec">2nd Owner</div>
+          </div>
+          <div class="car-footer">
+            <div class="car-price">₹2.15L</div>
+            <button class="car-enquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -2326,6 +2554,27 @@
       });
     });
   }
+
+  // ─── INVENTORY FILTER ───
+  (function() {
+    const filters = document.querySelectorAll('.inv-filter');
+    const cards = document.querySelectorAll('.car-card');
+    const countEl = document.getElementById('invNum');
+    filters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filters.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        let visible = 0;
+        cards.forEach(card => {
+          const show = f === 'all' || card.dataset.category === f;
+          card.classList.toggle('hidden', !show);
+          if (show) visible++;
+        });
+        if (countEl) countEl.textContent = visible;
+      });
+    });
+  })();
 
   // ─── CAR CARD 3D TILT ───
   if (isDesktop) {
